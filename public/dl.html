@@ -1,0 +1,1210 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media Video Downloader</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>:root {
+--primary-color: #4CAF50;
+--primary-dark: #45a049;
+--secondary-color: #2196F3;
+--accent-color: #FF4081;
+--background-color: #f0f8ff;
+--text-color: #333;
+--border-radius: 8px;
+}
+* {
+font-family: 'Rancho';/*'Brush Script MT', cursive;*/
+}
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+margin: 0;
+padding: 0;
+line-height: 1.6;
+color: var(--text-color);
+background-color: var(--background-color);
+background-size: cover;
+background-repeat: no-repeat; 
+background-position: center;
+  background:url(https://wallpapers.com/images/high/nature-android-hd-yyoz8w3usrejlzk9.webp);
+}
+
+.container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 20px;
+}
+
+.navbar {
+background-color: #FF0080;
+box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+z-index: 1000;
+  background:transparent;
+  color:darkslategrey;
+  border:0.4px solid darkslategrey;
+  backdrop-filter:blur(2px);
+}
+
+.navbar-container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 1rem 0;
+
+}
+
+.navbar-logo {
+color: var(--primary-color);
+font-size: 1.5rem;
+font-weight: bold;
+text-decoration: none;
+display: flex;
+align-items: center;
+margin-left: 1rem;
+}
+
+.navbar-logo i {
+margin-right: 0.5rem;
+}
+
+.navbar-menu {
+display: flex;
+list-style-type: none;
+margin: 0;
+padding: 0;
+}
+
+.navbar-link {
+color: var(--text-color);
+text-decoration: none;
+padding: 0.5rem 1rem;
+transition: color 0.3s ease;
+}
+
+.navbar-link:hover, .navbar-link.active {
+color: var(--primary-color);
+}
+
+
+.hero {
+/* background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); */
+color: black;/*#fff;*/
+padding: 120px 0 70px;
+text-align: center;
+}
+
+.animated-title {
+font-size: 3rem;
+font-weight: 700;
+margin-bottom: 1rem;
+animation: fadeIn 1s ease-out;
+text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+color: #4CAF50;
+}
+
+.subtitle {
+font-size: 1.2rem;
+margin-bottom: 2rem;
+animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+.download-form {
+max-width: 600px;
+margin: 0 auto;
+background-color: #fff;
+padding: 2rem;
+border-radius: var(--border-radius);
+box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+animation: fadeInUp 1s ease-out 1s both;
+  background:transparent;
+  color:darkslategrey;
+  backdrop-filter:blur(2px);
+  border:0.4px solid darkslategrey;
+}
+
+.input-container {
+margin-bottom: 1rem;
+margin-right: 1rem;
+}
+
+.input-container input {
+width: 100%;
+padding: 0.75rem;
+font-size: 1rem;
+border: 2px solid #e0e0e0;
+border-radius: var(--border-radius);
+transition: border-color 0.3s ease;
+}
+
+.input-container input:focus {
+outline: none;
+border-color: var(--primary-color);
+}
+
+.animated-button {
+background-color: var(--primary-color);
+color: #fff;
+border: none;
+padding: 0.75rem 1.5rem;
+font-size: 1rem;
+border-radius: var(--border-radius);
+cursor: pointer;
+transition: background-color 0.3s ease, transform 0.3s ease;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+}
+
+.animated-button:hover {
+background-color: var(--primary-dark);
+transform: translateY(-2px);
+}
+
+.animated-button i {
+margin-left: 0.5rem;
+}
+
+.supported-platforms {
+padding: 4rem 0;
+/* background-color: #fff; */
+}
+
+.section-title {
+text-align: center;
+font-size: 2.5rem;
+margin-bottom: 2rem;
+color: var(--primary-color);
+}
+
+.platform-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 2rem;
+}
+
+.platform-card {
+background-color: #fff;
+border-radius: var(--border-radius);
+box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+overflow: hidden;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+perspective: 1000px;
+height: 200px;
+display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+}
+
+.platform-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.card-inner {
+position: relative;
+width: 100%;
+height: 100%;
+transition: transform 0.6s;
+transform-style: preserve-3d;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+.platform-card:hover .card-inner {
+transform: rotateY(180deg);
+}
+.card-front {
+background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); 
+animation: gradient 15s ease infinite;
+}
+.card-front, .card-back {
+position: absolute;
+width: 100%;
+height: 100%;
+-webkit-backface-visibility: hidden;
+backface-visibility: hidden;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+padding: 1.5rem;
+}
+
+.card-back {
+/* background-color: var(--primary-color); */
+background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+animation: gradient 15s ease infinite;
+color: black;
+transform: rotateY(180deg);
+}
+
+.platform-card i {
+font-size: 3rem;
+color: var(--primary-color);
+margin-bottom: 0.5rem;
+}
+
+.platform-card h3 {
+margin: 0;
+font-size: 1.2rem;
+margin-top: 0.5rem;
+}
+
+footer {
+background-color: #333;
+color: #fff;
+text-align: center;
+padding: 1rem 0;
+}
+
+footer a {
+color: var(--primary-color);
+text-decoration: none;
+}
+
+footer i {
+color: #ff4081;
+}
+
+.chatbot-button {
+position: fixed;
+bottom: 20px;
+right: 20px;
+background-color: var(--primary-color);
+color: #fff;
+border: none;
+width: 60px;
+height: 60px;
+border-radius: 50%;
+font-size: 1.5rem;
+cursor: pointer;
+box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+transition: background-color 0.3s ease, transform 0.3s ease;
+transition: all 0.3s ease;
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 1000;
+}
+
+.chatbot-button:hover {
+background-color: var(--primary-dark);
+transform: scale(1.1) rotate(15deg);
+}
+
+.chatbot-button:active {
+transform: scale(0.9);
+}
+@keyframes pulse {
+0% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+}
+70% {
+    box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+}
+100% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+}
+}
+
+.chatbot-button.pulse {
+animation: pulse 1.5s infinite;
+}
+
+.chatbot-container {
+position: fixed;
+bottom: 90px;
+right: 20px;
+width: 300px;
+height: 400px;
+background-color: #fff;
+border-radius: var(--border-radius);
+box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+display: none;
+flex-direction: column;
+overflow: hidden;
+z-index: 1000;
+}
+
+.chatbot-header {
+background-color: var(--primary-color);
+color: #fff;
+padding: 1rem;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.chatbot-header h3 {
+margin: 0;
+font-size: 1.2rem;
+}
+
+.close-chatbot {
+background: none;
+border: none;
+color: #fff;
+font-size: 1.5rem;
+cursor: pointer;
+}
+
+.model-selector {
+padding: 1rem;
+border-bottom: 1px solid #e0e0e0;
+}
+
+.model-selector select {
+width: 100%;
+padding: 0.5rem;
+font-size: 1rem;
+border: 1px solid #e0e0e0;
+border-radius: var(--border-radius);
+}
+
+.chatbot-messages {
+flex-grow: 1;
+padding: 1rem;
+overflow-y: auto;
+display: flex;
+flex-direction: column;
+}
+
+.message {
+display: flex;
+align-items: flex-start;
+margin-bottom: 1rem;
+max-width: 80%;
+}
+
+.message.user {
+align-self: flex-end;
+flex-direction: row-reverse;
+}
+
+.message.bot {
+align-self: flex-start;
+}
+
+.avatar {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+overflow: hidden;
+margin: 0 0.5rem;
+flex-shrink: 0;
+}
+
+.avatar img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.message-content {
+position: relative;
+padding: 0.75rem;
+border-radius: var(--border-radius);
+max-width: calc(100% - 60px);
+word-wrap: break-word;
+hyphens: auto;
+}
+
+.message.user .message-content {
+background-color: #e3f2fd;
+}
+
+.message.bot .message-content {
+background-color: #f1f1f1;
+}
+
+.copy-button {
+position: absolute;
+top: 0.25rem;
+right: 0.25rem;
+background-color: rgba(255, 255, 255, 0.7);
+border: none;
+border-radius: 50%;
+width: 24px;
+height: 24px;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+opacity: 0;
+transition: opacity 0.2s ease-out;
+}
+
+.message-content:hover .copy-button,
+.message-content:focus-within .copy-button {
+opacity: 1;
+}
+
+.copy-button i {
+font-size: 0.8rem;
+color: var(--text-color);
+}
+
+.chatbot-form {
+display: flex;
+padding: 1rem;
+border-top: 1px solid #e0e0e0;
+}
+
+.chatbot-form input {
+flex-grow: 1;
+padding: 0.5rem;
+font-size: 1rem;
+border: 1px solid #e0e0e0;
+border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+.chatbot-form button {
+background-color: var(--primary-color);
+color: #fff;
+border: none;
+padding: 0.5rem 1rem;
+font-size: 1rem;
+border-radius: 0 var(--border-radius) var(--border-radius) 0;
+cursor: pointer;
+}
+
+.spinner {
+display: none;
+justify-content: center;
+align-items: center;
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: rgba(255, 255, 255, 0.8);
+z-index: 1001;
+}
+
+.loader {
+border: 4px solid #f3f3f3;
+border-top: 4px solid var(--primary-color);
+border-radius: 50%;
+width: 40px;
+height: 40px;
+animation: spin 1s linear infinite;
+}
+
+.status {
+text-align: center;
+margin-top: 1rem;
+padding: 0.75rem;
+border-radius: var(--border-radius);
+font-weight: bold;
+}
+
+.status.error {
+background-color: #ffebee;
+color: #d32f2f;
+}
+
+.status.success {
+background-color: #e8f5e9;
+color: #388e3c;
+}
+
+.status.info {
+background-color: #e3f2fd;
+color: #1976d2;
+}
+
+.video-container {
+margin-top: 2rem;
+display: flex;
+justify-content: center;
+}
+
+.video-container video {
+max-width: 100%;
+border-radius: var(--border-radius);
+box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.download-button-container {
+text-align: center;
+margin-top: 1rem;
+}
+
+.download-button {
+display: inline-block;
+background-color: var(--primary-color);
+color: #fff;
+text-decoration: none;
+padding: 0.75rem 1.5rem;
+border-radius: var(--border-radius);
+font-size: 1rem;
+transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.download-button:hover {
+background-color: var(--primary-dark);
+transform: translateY(-2px);
+}
+
+.download-button i {
+margin-right: 0.5rem; }
+
+#particles-js {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -1;
+}
+
+.about-content, .contact-content {
+background-color: #fff;
+border-radius: var(--border-radius);
+box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+padding: 2rem;
+margin-top: 2rem;
+margin-bottom: 1rem;
+}
+
+.about-content h2, .contact-content h2 {
+color: var(--primary-color);
+margin-top: 2rem;
+margin-bottom: 1rem;
+}
+
+.social-buttons {
+display: flex;
+justify-content: center;
+gap: 1rem;
+margin-top: 2rem;
+}
+
+.social-button {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+padding: 0.75rem 1.5rem;
+font-size: 1rem;
+font-weight: bold;
+text-decoration: none;
+color: #fff;
+border-radius: var(--border-radius);
+
+transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.social-button:hover {
+transform: translateY(-2px);
+}
+
+.social-button i {
+margin-right: 0.5rem;
+}
+
+.social-button.facebook {
+background-color: #1877f2;
+}
+
+.social-button.facebook:hover {
+background-color: #166fe5;
+}
+
+.social-button.github {
+background-color: #333;
+}
+
+.social-button.github:hover {
+background-color: #24292e;
+}
+
+@keyframes fadeIn {
+from {
+    opacity: 0;
+    transform: translateY(10px);
+}
+to {
+    opacity: 1;
+    transform: translateY(0);
+}
+}
+
+@keyframes fadeInUp {
+from {
+    opacity: 0;
+    transform: translateY(20px);
+}
+to {
+    opacity: 1;
+    transform: translateY(0);
+}
+}
+
+@keyframes gradient {
+0% {
+background-position: 0% 50%;
+}
+50% {
+background-position: 100% 50%;
+}
+100% {
+background-position: 0% 50%;
+}
+}
+
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+.navbar-container {
+    flex-direction: column;
+}
+
+.input-container input {
+    font-size: 14px;
+    padding: 0.5rem;
+}
+
+.navbar-menu {
+    margin-top: 1rem;
+}
+
+.animated-title {
+    font-size: 2rem;
+}
+
+.subtitle {
+    font-size: 1rem;
+}
+
+.download-form {
+    padding: 1.5rem;
+    opacity: 0;
+}
+
+.platform-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.chatbot-container {
+    width: 90%;
+    right: 5%;
+    left: 5%;
+}
+}</style>
+  <link rel="icon" href="images/icon.png" type="image/png">
+  <meta name="description" content="All Video Downloader by Imran">
+  <script src="js/all.min.js"></script>
+  <script src="js/particles.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Rancho&amp;effect=shadow-multiple" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => {
+initializeUI();
+initializeParticles();
+initializeChatbot();
+initializeNavbar();
+});
+
+function initializeNavbar() {
+const navbarToggle = document.getElementById('navbar-toggle');
+const navbarMenu = document.getElementById('navbar-menu');
+
+if (navbarToggle && navbarMenu) {
+    navbarToggle.addEventListener('click', () => {
+        navbarToggle.classList.toggle('active');
+        navbarMenu.classList.toggle('active');
+    });
+
+    const navLinks = navbarMenu.querySelectorAll('.navbar-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navbarToggle.classList.remove('active');
+            navbarMenu.classList.remove('active');
+        });
+    });
+}
+}
+
+function initializeUI() {
+const downloadForm = document.getElementById('downloadForm');
+const videoUrlInput = document.getElementById('videoUrl');
+const loadingSpinner = document.getElementById('loading');
+const statusElement = document.getElementById('status');
+const downloadButtonContainer = document.getElementById('downloadButtonContainer');
+const downloadButton = document.getElementById('downloadButton');
+const videoContainer = document.getElementById('videoContainer');
+
+downloadForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const videoUrl = videoUrlInput.value.trim();
+
+    if (!videoUrl) {
+        showStatus('Please enter a valid video URL.', 'error');
+        return;
+    }
+
+    showLoading(true);
+    showStatus('Processing your request...', 'info');
+
+    try {
+        const response = await fetch(`/dl?url=${encodeURIComponent(videoUrl)}`);
+        const data = await response.json();
+
+        if (response.ok) {
+            showStatus('Video processed successfully!', 'success');
+            displayVideo(data.data.low);
+            showDownloadButton(data.data.high);
+        } else {
+            showStatus(`Error: ${data.message}`, 'error');
+        }
+    } catch (error) {
+        showStatus('An error occurred. Please try again.', 'error');
+        console.error('Error:', error);
+    } finally {
+        showLoading(false);
+    }
+});
+
+function showLoading(isLoading) {
+    loadingSpinner.style.display = isLoading ? 'flex' : 'none';
+}
+
+function showStatus(message, type) {
+    statusElement.textContent = message;
+    statusElement.className = `status ${type}`;
+    statusElement.classList.add('show');
+}
+
+function displayVideo(videoUrl) {
+    videoContainer.innerHTML = `
+        <video controls>
+            <source src="${videoUrl}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    `;
+    videoContainer.classList.add('show');
+}
+
+function showDownloadButton(videoUrl) {
+    downloadButton.href = videoUrl;
+    downloadButtonContainer.style.display = 'block';
+}
+}
+
+function initializeParticles() {
+particlesJS('particles-js', {
+    particles: {
+        number: {
+            value: 80,
+            density: {
+                enable: true,
+                value_area: 800
+            }
+        },
+        color: {
+            value: '#4CAF50'
+        },
+        shape: {
+            type: 'circle'
+        },
+        opacity: {
+            value: 0.5,
+            random: false
+        },
+        size: {
+            value: 3,
+            random: true
+        },
+        line_linked: {
+            enable: true,
+            distance: 150,
+            color: '#4CAF50',
+            opacity: 0.4,
+            width: 1
+        },
+        move: {
+            enable: true,
+            speed: 6,
+            direction: 'none',
+            random: false,
+            straight: false,
+            out_mode: 'out',
+            bounce: false
+        }
+    },
+    interactivity: {
+        detect_on: 'canvas',
+        events: {
+            onhover: {
+                enable: true,
+                mode: 'repulse'
+            },
+            onclick: {
+                enable: true,
+                mode: 'push'
+            },
+            resize: true
+        },
+        modes: {
+            grab: {
+                distance: 400,
+                line_linked: {
+                    opacity: 1
+                }
+            },
+            bubble: {
+                distance: 400,
+                size: 40,
+                duration: 2,
+                opacity: 8,
+                speed: 3
+            },
+            repulse: {
+                distance: 200,
+                duration: 0.4
+            },
+            push: {
+                particles_nb: 4
+            },
+            remove: {
+                particles_nb: 2
+            }
+        }
+    },
+    retina_detect: true
+});
+}
+
+function initializeChatbot() {
+const chatbotButton = document.getElementById('chatbot-button');
+const chatbotContainer = document.getElementById('chatbot-container');
+const closeChatbot = document.getElementById('close-chatbot');
+const chatbotMessages = document.getElementById('chatbot-messages');
+const chatbotForm = document.getElementById('chatbot-form');
+const chatbotInput = document.getElementById('chatbot-input');
+const aiModelSelect = document.getElementById('ai-model');
+
+let currentModel = 'wizardlm';
+const userId = generateUserId();
+
+chatbotButton.addEventListener('click', () => {
+    chatbotContainer.style.display = 'flex';
+    chatbotButton.style.display = 'none';
+    chatbotButton.classList.remove('pulse');
+});
+
+closeChatbot.addEventListener('click', () => {
+    chatbotContainer.style.display = 'none';
+    chatbotButton.style.display = 'flex';
+    chatbotButton.classList.add('pulse');
+});
+
+aiModelSelect.addEventListener('change', (e) => {
+    currentModel = e.target.value;
+    const selectedOption = e.target.options[e.target.selectedIndex];
+    const color = selectedOption.getAttribute('data-color');
+    chatbotContainer.style.setProperty('--chatbot-color', color);
+});
+
+chatbotForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const message = chatbotInput.value.trim();
+    if (!message) return;
+
+    addMessage(message, 'user');
+    chatbotInput.value = '';
+
+    const botMessage = await getBotResponse(message);
+    addMessage(botMessage, 'bot');
+});
+
+function addMessage(content, sender) {
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('message', sender);
+
+    const avatarElement = document.createElement('div');
+    avatarElement.classList.add('avatar');
+    if (sender === 'bot') {
+        avatarElement.innerHTML = '<img src="https://i.ibb.co/52xnp50/bot-avatar-removebg-preview.png" alt="Bot Avatar">';
+    } else {
+        avatarElement.innerHTML = '<img src="https://i.ibb.co/K5JMgyV/user-avatar.png" alt="User Avatar">';
+    }
+
+    const contentElement = document.createElement('div');
+    contentElement.classList.add('message-content');
+    contentElement.textContent = content;
+
+    const copyButton = document.createElement('button');
+    copyButton.classList.add('copy-button');
+    copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+    copyButton.addEventListener('click', () => copyToClipboard(content));
+
+    contentElement.appendChild(copyButton);
+    messageElement.appendChild(avatarElement);
+    messageElement.appendChild(contentElement);
+    chatbotMessages.appendChild(messageElement);
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+}
+
+async function getBotResponse(message) {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    const model = aiModelSelect.value;
+    let apiUrl;
+
+    switch (model) {
+        case 'copilot':
+            apiUrl = `https://joshweb.click/api/copilot?prompt=${encodeURIComponent(message)}&uid=${userId}`;
+            break;
+        case 'deepseek-coder':
+            apiUrl = `https://joshweb.click/ai/deepseek-coder?q=${encodeURIComponent(message)}&uid=${userId}`;
+            break;
+        case 'llama-3-8b':
+            apiUrl = `https://joshweb.click/ai/llama-3-8b?q=${encodeURIComponent(message)}&uid=${userId}`;
+            break;
+        default:
+            apiUrl = `https://joshweb.click/ai/wizardlm?q=${encodeURIComponent(message)}&uid=${userId}`;
+    }
+
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        if (data.status && data.result) {
+            return data.result;
+        } else {
+            throw new Error('Invalid response from AI API');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        return 'Sorry, I encountered an error. Please try again later.';
+    }
+}
+
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Copied!',
+            text: 'The message has been copied to your clipboard.',
+            toast: true,
+            position: 'center',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+    }).catch(err => {
+        console.error('Failed to copy text: ', err);
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Failed to copy the message. Please try again.',
+            toast: true,
+            position: 'center',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+    });
+}
+}
+
+function generateUserId() {
+return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0,
+        v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+});
+}</script>
+</head>
+<body>
+  <nav class="navbar">
+      <div class="navbar-container">
+          <a href="/" class="navbar-logo">
+              <i class="fas fa-video"></i>
+              Media Video Downloader
+          </a>
+          <ul class="navbar-menu" id="navbar-menu">
+              <li><a href="/" class="navbar-link active">Home</a></li>
+
+          </ul>
+      </div>
+  </nav>
+  <div class="hero">
+      <div class="container">
+          <header>
+              <h1 class="animated-title">All Video Downloader</h1>
+              <p class="subtitle">Download videos from various platforms with ease</p>
+          </header>
+          <main>
+              <form id="downloadForm" aria-label="Video download form" class="download-form">
+                  <div class="input-container">
+                      <label for="videoUrl" class="sr-only">Video URL</label>
+                      <input type="url" id="videoUrl" name="videoUrl" required="" placeholder="Enter video URL here">
+                      <div class="input-focus-effect"></div>
+                  </div>
+                  <button type="submit" class="animated-button">
+                      <span class="button-text">Download </span>
+                      <i class="fas fa-download"></i>
+                  </button>
+              </form>
+              <div id="loading" class="spinner" aria-live="polite" style="display: none;">
+                  <div class="loader"></div>
+              </div>
+              <div id="status" class="status" aria-live="polite"></div>
+              <div id="downloadButtonContainer" class="download-button-container" style="display: none;">
+                  <a id="downloadButton" href="#" class="download-button" download="">
+                      <i class="fas fa-download"></i> Download Video
+                  </a>
+              </div>
+              <div class="video-container" id="videoContainer"></div>
+          </main>
+      </div>
+  </div>
+
+  <section aria-label="Supported platforms" class="supported-platforms">
+      <div class="container">
+          <h2 class="section-title">Supported Platforms</h2>
+          <div class="platform-grid">
+              <div class="platform-card" data-platform="instagram">
+                  <div class="card-inner">
+                      <div class="card-front">
+                          <i class="fab fa-instagram"></i>
+                          <h3>Instagram</h3>
+                      </div>
+                      <div class="card-back">
+                          <p>Videos, stories, and reels</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="platform-card" data-platform="tiktok">
+                  <div class="card-inner">
+                      <div class="card-front">
+                          <i class="fab fa-tiktok"></i>
+                          <h3>TikTok</h3>
+                      </div>
+                      <div class="card-back">
+                          <p>Videos with no watermark</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="platform-card" data-platform="facebook">
+                  <div class="card-inner">
+                      <div class="card-front">
+                          <i class="fab fa-facebook"></i>
+                          <h3>Facebook</h3>
+                      </div>
+                      <div class="card-back">
+                          <p>Videos, stories, and reels</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="platform-card" data-platform="youtube">
+                  <div class="card-inner">
+                      <div class="card-front">
+                          <i class="fab fa-youtube"></i>
+                          <h3>YouTube</h3>
+                      </div>
+                      <div class="card-back">
+                          <p>Videos and shorts</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="platform-card" data-platform="linkedin">
+                  <div class="card-inner">
+                      <div class="card-front">
+                          <i class="fab fa-linkedin"></i>
+                          <h3>LinkedIn</h3>
+                      </div>
+                      <div class="card-back">
+                          <p>Videos</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="platform-card" data-platform="twitter">
+                  <div class="card-inner">
+                      <div class="card-front">
+                          <i class="fab fa-twitter"></i>
+                          <h3>Twitter</h3>
+                      </div>
+                      <div class="card-back">
+                          <p>Videos</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="platform-card" data-platform="threads">
+                  <div class="card-inner">
+                      <div class="card-front">
+                          <i class="fas fa-at"></i>
+                          <h3>Threads</h3>
+                      </div>
+                      <div class="card-back">
+                          <p>Videos</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="platform-card" data-platform="pinterest">
+                  <div class="card-inner">
+                      <div class="card-front">
+                          <i class="fab fa-pinterest"></i>
+                          <h3>Pinterest</h3>
+                      </div>
+                      <div class="card-back">
+                          <p>Videos (don't use "pin.it")</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <footer>
+      <div class="container">
+          <p>Made with <i class="fas fa-heart"></i> by <a href="https://www.facebook.com/Imran.Ahmed099" target="_blank" rel="noopener noreferrer">Imran</a></p>
+      </div>
+  </footer>
+
+  <div id="particles-js"></div>
+  <button id="chatbot-button" class="chatbot-button" aria-label="Open chat">
+      <i class="fas fa-comment"></i>
+  </button>
+  <div id="chatbot-container" class="chatbot-container">
+      <div class="chatbot-header">
+          <h3><i class="fas fa-robot"></i> Virtual AI Assistant</h3>
+          <button id="close-chatbot" class="close-chatbot" aria-label="Close chat">×</button>
+      </div>
+      <div class="model-selector">
+          <label for="ai-model">Choose AI Model:</label>
+          <select id="ai-model" name="ai-model">
+              <option value="wizardlm" data-color="#4CAF50">WizardLM</option>
+              <option value="copilot" data-color="#2196F3">Microsoft Copilot</option>
+              <option value="deepseek-coder" data-color="#FF9800">DeepSeek Coder</option>
+              <option value="llama-3-8b" data-color="#9C27B0">Llama 3 8B</option>
+          </select>
+      </div>
+      <div id="chatbot-messages" class="chatbot-messages"></div>
+      <form id="chatbot-form" class="chatbot-form">
+          <label for="chatbot-input" class="sr-only">Type your message</label>
+          <input type="text" id="chatbot-input" placeholder="Type your message...">
+          <button type="submit" class="send-button" aria-label="Send message">
+              <i class="fas fa-paper-plane"></i>
+          </button>
+      </form>
+  </div>
+
+</body></html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Services</title>
+    <!-- Link to Bootstrap CSS for grid and other styles -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Link to icon library (for example, Bootstrap Icons) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Link to AOS (Animate On Scroll) for animations -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom CSS for the services section -->
+    <style>
+        /*--------------# Services---------------*/
+
+        .services .icon-box {
+            margin-bottom: 20px;
+        }
+
+        .services .icon {
+            float: left;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 54px;
+            height: 54px;
+            background: #149ddd;
+            border-radius: 50%;
+            transition: 0.5s;
+            border: 1px solid #149ddd;
+        }
+
+        .services .icon i {
+            color: #fff;
+            font-size: 24px;
+            line-height: 0;
+        }
+
+        .services .icon-box:hover .icon {
+            background: #fff;
+        }
+
+        .services .icon-box:hover .icon i {
+            color: #149ddd;
+        }
+
+        .services .title {
+            margin-left: 80px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .services .title a {
+            color: #343a40;
+        }
+
+        .services .title a:hover {
+            color: #149ddd;
+        }
+
+        .services .description {
+            margin-left: 80px;
+            line-height: 24px;
+            font-size: 14px;
+        }
+
+        /* Style for the code box */
+
+        .services .code-block {
+            background-color: #222;
+            color: #fff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 20px;
+            overflow-x: auto;
+            white-space: padding-box;
+            display: inline-block;
+            max-width: 100%;
+        }
+
+        .services .code-block code {
+            font-family: monospace;
+        }
+
+        /* Syntax highlighting */
+
+        .services .code-block .string {
+            color: #ce9178;
+        }
+
+        .services .code-block .number {
+            color: #b5cea8;
+        }
+
+        .services .code-block .keyword {
+            color: #9cdcfe;
+        }
+
+        .services .code-block .variable {
+            color: #569cd6;
+        }
+
+        .services .code-block .package {
+            color: #d44950;
+        }
+
+        .services .code-block .comment {
+            color: #608b4e;
+        }
+    </style>
+</head>
+
+<body>
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>API'S</h2>
+                <p>There are some APIs everyone can use. If any API doesn't work, message the Admin to repair it.</p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
+                    <div class="icon"><i class="bi bi-code-square"></i></div>
+                    <h4 class="title"><a href="#">All Video Downloader</a></h4>
+                    <p class="description">Download all videos from its link, like Facebook, TikTok, CapCut, Likee, Threads, Pinterest, etc.</p>
+                </div>
+
+                <div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up" data-aos-delay="600">
+                    <div class="icon"><i class="bi bi-code-square"></i></div>
+                    <h4 class="title"><a href="#">Downloader API Request Example</a></h4>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">const axios = require("axios");
+const res = await axios.get(`https://masterapi.site/dl?url=https://fb.watch/r9gTb_anSv/`);
+const data = res.data;</code></pre>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
+                    <div class="icon"><i class="bi bi-code-square"></i></div>
+                    <h4 class="title"><a href="#">Result API</a></h4>
+                    <p class="description">Get SSC, HSC Results</p>
+                </div>
+
+                <div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up" data-aos-delay="600">
+                    <div class="icon"><i class="bi bi-code-square"></i></div>
+                    <h4 class="title"><a href="#">Result API Request Example</a></h4>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">const axios = require("axios");
+const res = await axios.get(`https://masterapi.site/result?exam=()&year=()&board=()&roll=()&registration=()`);
+const data = res.data;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Copyright Footer -->
+    <footer class="text-center py-3">
+        <p>&copy; <span id="year"></span> IMRAN. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Link to Bootstrap JS (for responsiveness) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Link to AOS JS (for animations) -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+    <script>
+        // Initialize AOS for scroll animations
+        AOS.init();
+
+        // Set current year dynamically for the copyright
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>

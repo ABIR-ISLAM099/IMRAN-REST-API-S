@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMRAN API'S</title>
+
+    <!--Fuck You -->
+ <style>body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(999deg, #ff7e5f, #feb47b, #86a8e7, #91eae4);
+    background-size: 500% 500%;
+    color: #fff;
+    animation: gradientBG 14s ease infinite;
+}
+
+/* ржЖржмрж╛рж░ ржЖржЗржЫрзЛ css ржЪрзБрж░рж┐ ржХрж░рждрзЗ рж╢рж╛рж▓рж╛ рждрзБржЗ ржЖрж░ ржнрж╛рж▓рзЛ рж╣ржЗрж▓рж┐ ржирж╛ ЁЯШ╛ЁЯШ╛*/
+
+h2 {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 2rem;
+    font-weight: bold;
+    animation: fadeInTitle 6s infinite, colorChange 1s infinite;
+    text-shadow: 4px 3px 6px rgba(0, 0, 0, 0.8);
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    overflow: hidden;
+    animation: fadeInUp 2s ease-in-out;
+}
+
+th,
+td {
+    padding: 11px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+th {
+    background-color: rgba(255, 255, 255, 0.3);
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+td {
+    transition: all 0.3s ease;
+}
+
+td:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+.status-green {
+    color: #00ff00;
+    font-weight: bold;
+}
+
+.status-red {
+    color: #ff4d4d;
+    font-weight: bold;
+}
+
+.arrow {
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.arrow:hover {
+    transform: scale(1.2);
+}
+
+#curl-example-container {
+    width: 80%;
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #fff;
+    display: none;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 50px;
+    animation: fadeInUp 1s ease-in-out;
+}
+
+#curl-example {
+    font-family: monospace;
+    white-space: nowrap;
+    margin: 0;
+    padding: 3px;
+    background: #fff;
+    color: #333;
+    border-radius: 0px;
+    overflow-x: auto;
+}
+
+.copy-btn {
+    position: relative;
+    display: inline-block;
+    padding: 8px 9px;
+    background: #ff5722;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 11px;
+    transition: all 0.3s ease;
+}
+
+.copy-btn:hover {
+    background: #e64a19;
+    transform: scale(1.1);
+}
+
+footer {
+    text-align: center;
+    margin: 5px 5;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.0);
+    font-size: 12px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+footer a {
+    color: #ffcc00;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #ffc107;
+}
+
+.social-media-links {
+    display: flex;
+    justify-content: center;
+    margin-top: 0px;
+}
+
+.social-media-links li {
+    list-style: none;
+    margin: 0 8px;
+}
+
+.social-media-links a {
+    color: #ffff;
+    font-size: 19px;
+    transition: color 0.1s ease;
+}
+
+.social-media-links a:hover {
+    color: #ff5722;
+}
+
+.social-media-links i {
+    margin: 1;
+}
+
+/* Animations */
+
+@keyframes fadeInTitle {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+
+@keyframes colorChange {
+    0% {
+        color: #ff7e5f;
+    }
+    25% {
+        color: #feb47b;
+    }
+    50% {
+        color: #86a8e7;
+    }
+    75% {
+        color: #91eae4;
+    }
+    100% {
+        color: #ff7e5f;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(90px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(90);
+    }
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 200% 100%;
+    }
+    50% {
+        background-position: 300% 100%;
+    }
+    100% {
+        background-position: 50% 50%;
+    }
+}</style>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <h2>IMRAN REST API</h2>
+
+    <!--Ami Jani tui amar HTML churi korte eshechis  bhalo hoye ja, ekhono somoy ache shala MC BC -->
+
+    <table>
+        <thead>
+            <tr>
+                <th>API Name</th>
+                <th>Status</th>
+                <th>Symbol</th>
+                <th>Get</th>
+                <th>Curl</th>
+            </tr>
+        </thead>
+        <tbody id="api-table"></tbody>
+    </table>
+
+    <div id="curl-example-container">
+        <button class="copy-btn" onclick="copyCurlExample()">Copy</button>
+        <pre id="curl-example"></pre>
+    </div>
+
+    <ul class="social-media-links"></ul>
+
+    <footer>
+        2023 - <span id="current-year"></span> ©
+        <a href="https://www.facebook.com/Imon.132233" target="_blank">Documentation</a> | Powered by imran
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>const apis = [{
+        name: 'alldown',
+        endpoint: '/dl?url=',
+        status: 'Active',
+        expected: ''
+    },
+    {
+        name: 'ndown',
+        endpoint: '/ndown?url=',
+        status: 'Active',
+        expected: ''
+    }
+];
+
+const baseUrl = `${window.location.protocol}//${window.location.host}`;
+const tableBody = document.getElementById('api-table');
+
+// Populate API table
+apis.forEach((api, index) => {
+    const isActive = api.status === 'Active';
+    const row = document.createElement('tr');
+    row.innerHTML = `
+    <td>${index + 1}. ${api.name}</td>
+    <td class="${isActive ? 'status-green' : 'status-red'}">${api.status}</td>
+    <td>${isActive ? '<span style="color: green;">✔</span>' : '<span style="color: red;">✘</span>'}</td>
+    <td class="arrow" onclick="${isActive ? `openApiUrl('${api.name}', '${api.endpoint}', '${api.expected}')` : ''}">[➾]</td>
+    <td class="arrow" onclick="${isActive ? `showCurlExample('${api.name}', '${api.endpoint}')` : ''}">⟮⬇︎⟯</td>
+  `;
+    tableBody.appendChild(row);
+});
+
+const socialMediaLinks = [{
+        href: "https://www.facebook.com/Imran.Ahmed099",
+        icon: "fab fa-facebook-f"
+    },
+    {
+        href: "https://wa.me/+8801689903267",
+        icon: "fab fa-whatsapp"
+    },
+    {
+        href: "https://www.npmjs.com/package/imran-alldl",
+        icon: "fab fa-npm"
+    }
+];
+
+const socialLinksContainer = document.querySelector('.social-media-links');
+socialMediaLinks.forEach(link => {
+    const listItem = document.createElement('li');
+    listItem.innerHTML = `<a href="${link.href}" target="_blank"><i class="${link.icon}"></i></a>`;
+    socialLinksContainer.appendChild(listItem);
+});
+
+function openApiUrl(apiName, endpoint, expectedDomain) {
+    const url = prompt(`Enter the URL for ${apiName}:`);
+    if (url) {
+        window.open(`${baseUrl}${endpoint}${encodeURIComponent(url)}`, '_blank');
+    }
+}
+
+function showCurlExample(apiName, endpoint) {
+    const curlExample = `curl -X GET "${baseUrl}${endpoint}YOUR_URL_HERE" -H "Content-Type: application/json"`;
+    const exampleContainer = document.getElementById('curl-example-container');
+    const exampleBox = document.getElementById('curl-example');
+
+    exampleBox.textContent = curlExample;
+    exampleContainer.style.display = 'block';
+}
+
+function copyCurlExample() {
+    const exampleText = document.getElementById('curl-example').textContent;
+    navigator.clipboard.writeText(exampleText).then(() => {
+        alert('Curl command copied to clipboard!');
+    }).catch(err => {
+        alert('Failed to copy text: ' + err);
+    });
+}
+
+document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
+
+</html>
